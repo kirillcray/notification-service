@@ -55,7 +55,7 @@ def post_notifications():
         recipient=data['recipient'],
         subject=data.get('subject'),
         message=data['message'],
-        status='queued',
+        status='pending',
         channel_data=data.get('channel_data')
     )
     db.session.add(notification)

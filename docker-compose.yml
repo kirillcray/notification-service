@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: notify_db
+    environment:
+      POSTGRES_USER: notify_user
+      POSTGRES_PASSWORD: notify_pass
+      POSTGRES_DB: notify_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U notify_user -d notify_db" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  broker:
+    image: rabbitmq:3-management-alpine
+    container_name: notify_broker
+    ports:
+      - "5672:5672" # порт для приложения
+      - "15672:15672" # веб-морда (логин/пароль: guest/guest)
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
