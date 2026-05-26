@@ -173,10 +173,50 @@ status 200 Ok
     "total": 18
 }
 ```
+## Тесты
 
-## Postman
-В папке `postman/` лежит готовая коллекция тестов PostMan `notification-service.postman_collection.json`. Коллекция состоит из 7 тестов: создание уведомления для смс, емейл и тг, получение всех трех уведомлений и получение списка всех уведомлений.
+### Локально
 
+1. Создайте виртуальное окружение:
+   ```bash
+   python -m venv venv
+   ```
+
+2. Активируйте его:
+   ```bash
+   # Windows
+   source venv\Scripts\activate
+
+   # Linux / macOS
+   source venv/bin/activate
+   ```
+
+3. Установите зависимости:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Запустите тесты:
+   ```bash
+   pytest
+   ```
+
+
+### Через Docker
+
+```bash
+docker-compose run --rm api pytest
+```
+### Postman
+
+В папке `postman/` лежит готовая коллекция для Postman — `notification-service.postman_collection.json`.
+
+Коллекция включает 7 запросов:
+- Создание уведомления для SMS
+- Создание уведомления для Email
+- Создание уведомления для Telegram
+- Получение конкретного уведомления (SMS, Email, Telegram)
+- Получение списка всех уведомлений
 ## Архитектура
 
 - API кладёт `id` уведомления в очередь и сразу отвечает клиенту.
@@ -193,8 +233,9 @@ app/
 ├── models.py         # модель Notification
 ├── config.py         # конфигурация
 └── extensions.py     # db, migrate
-
+tests/                # тесты
 run.py                # точка входа для API
 worker.py             # точка входа для воркера
 Dockerfile
 docker-compose.yml```
+
