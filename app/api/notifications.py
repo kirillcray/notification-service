@@ -1,10 +1,10 @@
+from app.broker import publish_notification
 from flask import jsonify, request
 from app.api import api_bp
 from app.models import Notification
 from app.extensions import db
 from app.utils.validators import validate_notification
 import logging
-
 logger = logging.getLogger(__name__)
 
 
@@ -74,5 +74,15 @@ def post_notifications():
     logger.info(
         f"Получен запрос на уведомление type={data['type']} recipient={data['recipient']}"
     )
-
-    return jsonify({"id": notification.id, "status": "queued"}), 201
+    try:
+        publish_notification(notification.id)
+    except Exception as e:
+        notification.status = 'failed'
+        notification.error_text = f"Ошибка публикации в очередь: {e}"
+        db.session.commit()
+        logger.error(f"Не удалось опубликовать в очередь: {e}")
+        return jsonify({'error': 'Failed to queue notification'}), 500
+    return jsonify({
+        'id': notification.id,
+        'status': 'queued'
+    }), 201
