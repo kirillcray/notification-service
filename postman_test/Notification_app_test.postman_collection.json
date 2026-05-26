@@ -55,13 +55,13 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{base_url}}/notifications/notification_id",
+          "raw": "{{base_url}}/notifications/{{notification_id}}",
           "host": [
             "{{base_url}}"
           ],
           "path": [
             "notifications",
-            "notification_id"
+            "{{notification_id}}"
           ]
         }
       },
@@ -69,9 +69,25 @@
     },
     {
       "name": "List notifications",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
       "request": {
         "method": "GET",
-        "header": []
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"type\": \"email\",\n  \"recipient\": \"test@example.com\",\n  \"subject\": \"Hello\",\n  \"message\": \"Test notification\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/notifications",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "notifications"
+          ]
+        }
       },
       "response": []
     }
