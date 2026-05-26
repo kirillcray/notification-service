@@ -40,6 +40,16 @@ services:
       broker:
         condition: service_healthy
     command: sh -c "flask --app run db upgrade && gunicorn -b 0.0.0.0:5001 run:app"
-
+  worker:
+    build: .
+    container_name: notify_worker
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+      broker:
+        condition: service_healthy
+    command: python worker.py
 volumes:
   postgres_data:
