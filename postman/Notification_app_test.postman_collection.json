@@ -16,7 +16,7 @@
             "exec": [
               "const response = pm.response.json();",
               "if (response.id) {",
-              "    pm.collectionVariables.set(\"notification_id\", response.id);",
+              "    pm.collectionVariables.set(\"notification_id_sms\", response.id);",
               "}"
             ],
             "type": "text/javascript",
@@ -30,7 +30,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"type\": \"email\",\n  \"recipient\": \"test@example.com\",\n  \"subject\": \"Hello\",\n  \"message\": \"Test notification\"\n}",
+          "raw": "{\n  \"type\": \"sms\",\n  \"recipient\": \"+71111111111\",\n  \"subject\": \"Hello its sms\",\n  \"message\": \"Test notification in sms\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -58,7 +58,7 @@
             "exec": [
               "const response = pm.response.json();",
               "if (response.id) {",
-              "    pm.collectionVariables.set(\"notification_id\", response.id);",
+              "    pm.collectionVariables.set(\"notification_id_tg\", response.id);",
               "}"
             ],
             "type": "text/javascript",
@@ -72,7 +72,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"type\": \"email\",\n  \"recipient\": \"test@example.com\",\n  \"subject\": \"Hello\",\n  \"message\": \"Test notification\"\n}",
+          "raw": "{\n  \"type\": \"telegram\",\n  \"recipient\": \"@test\",\n  \"message\": \"Test notification in tg\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -92,7 +92,7 @@
       "response": []
     },
     {
-      "name": "Create notification sms email",
+      "name": "Create notification email",
       "event": [
         {
           "listen": "test",
@@ -100,7 +100,7 @@
             "exec": [
               "const response = pm.response.json();",
               "if (response.id) {",
-              "    pm.collectionVariables.set(\"notification_id\", response.id);",
+              "    pm.collectionVariables.set(\"notification_id_email\", response.id);",
               "}"
             ],
             "type": "text/javascript",
@@ -114,7 +114,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"type\": \"email\",\n  \"recipient\": \"test@example.com\",\n  \"subject\": \"Hello\",\n  \"message\": \"Test notification\"\n}",
+          "raw": "{\n  \"type\": \"email\",\n  \"recipient\": \"test@example.com\",\n  \"message\": \"Test notification\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -152,7 +152,7 @@
       "response": []
     },
     {
-      "name": "Notification by id sms tg",
+      "name": "Notification by id tg",
       "request": {
         "method": "GET",
         "header": [],
@@ -197,7 +197,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"type\": \"email\",\n  \"recipient\": \"test@example.com\",\n  \"subject\": \"Hello\",\n  \"message\": \"Test notification\"\n}"
+          "raw": ""
         },
         "url": {
           "raw": "{{base_url}}/notifications",

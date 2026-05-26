@@ -209,7 +209,7 @@ docker-compose run --rm api pytest
 ```
 ### Postman
 
-В папке `postman/` лежит готовая коллекция для Postman — `notification-service.postman_collection.json`.
+В папке `postman/` лежит готовая коллекция для Postman — `Notification_app_test.postman_collection.json`.
 
 Коллекция включает 7 запросов:
 - Создание уведомления для SMS
@@ -237,5 +237,6 @@ tests/                # тесты
 run.py                # точка входа для API
 worker.py             # точка входа для воркера
 Dockerfile
-docker-compose.yml```
+docker-compose.yml
+```
 
