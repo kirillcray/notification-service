@@ -1,0 +1,113 @@
+{
+  "info": {
+    "_postman_id": "a69bb29e-59eb-4dfe-be88-7697f6883bcb",
+    "name": "Notification_app_test",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "45054326",
+    "_collection_link": "https://go.postman.co/collection/45054326-a69bb29e-59eb-4dfe-be88-7697f6883bcb?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Create notification",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const response = pm.response.json();",
+              "if (response.id) {",
+              "    pm.collectionVariables.set(\"notification_id\", response.id);",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"type\": \"email\",\n  \"recipient\": \"test@example.com\",\n  \"subject\": \"Hello\",\n  \"message\": \"Test notification\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/notifications",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "notifications"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Notification by id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/notifications/notification_id",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "notifications",
+            "notification_id"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "List notifications",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": ""
+    },
+    {
+      "key": "notification_id",
+      "value": ""
+    }
+  ]
+}
