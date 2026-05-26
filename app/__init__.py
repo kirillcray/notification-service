@@ -1,7 +1,16 @@
 import os
+import logging
+import sys
+
 from flask import Flask
 from app.config import config_by_name
 from app.extensions import db, migrate
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s %(levelname)s [%(name)s] %(message)s',
+    stream=sys.stdout,
+)
 
 
 def create_app(config_name=None):

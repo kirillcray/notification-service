@@ -1,11 +1,16 @@
 import json
 import logging
 import os
+import sys
 from app import create_app
 from app.broker import get_connection
 from app.tasks import handle_notification
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s %(levelname)s [%(name)s] %(message)s',
+    stream=sys.stdout,
+)
 logger = logging.getLogger('worker')
 
 
